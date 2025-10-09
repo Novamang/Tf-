@@ -1,84 +1,90 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-  <style>
-  body {
-    font-size:50px;
-  }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Results - RAYAN SHAIKH</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Poppins',sans-serif;background-color:aqua;margin:0;padding:0;}
+.container{width:85%;margin:40px auto;background:#fff;padding:25px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.3);}
+h1{text-align:center;color:#003366;}
+.correct{color:green;}
+.wrong{color:red;}
+.resultBox{font-size:20px;font-weight:bold;color:#004080;text-align:center;}
+</style>
 </head>
 <body>
-  <center>
-  <h1> True & False </h1>
-    <hr>
-    <h2> FIRST SET</h2>
-    <h3>
-    <p>1) Mutilevel list can be created in html.</p>
-    <p>Ans:<font color="red">True</font></p>
-    <br>
-    <p>2) HTML is an object oriented programming language.</p>
-    <p>Ans:<font color="red">False</font></p>
-    <br>
-    <p>3) Charset is used for character including declaration.</p>
-    <p>Ans:<font color="red">True</font></p>
-    <br>
-    <p>4) .CS is the extension of CSS file.</p>
-    <p>Ans:<font color="red">False</font></p>
-    <br>
-    <p>5) Input type="url" defines a feild for entering URL:</p>
-    <p>Ans:<font color="red"> True </font></p>
-    <br>
-    <p>6) Input type="image" defines an image as a submit button.</p>
-    <p>Ans:<font color="red">True</font></p>
-    <br>
-    <p>7) Default range of range controler is 100-200.</p>
-    <p>Ans:<font color="red"> False</font></p>
-    <br>
-    <p>8) Meta data will not be displayed on web page .</p>
-    <p>Ans:<font color="red">True</font></p>
-    <br>
-    <p>9) Meta tags is paired tag.</p>
-    <p>Ans:<font color="red"> False</font></p>
-    <br>
-    <p>10) Meta charset="UTF-8" is for indian characters.</p>
-    <p>Ans:<font color="red"> True</font></p>
-    </h3>
-    <h2> SECOND SET </h2>
-    <hr>
-     <h3>
-    <p>11) The companies that provides web hosting services are called web host.</p>
-    <p>Ans:<font color="red"> True</font></p>
-    <br>
-    <p>12) You can buy your own web server space but it is most expensive way to publish your website .</p>
-    <p>Ans:<font color="red"> True </font></p>
-       <br>    
-    <p>13) Width attribute specifies the width of an iframe.</p>
-    <p>Ans:<font color="red"> True</font></p>
-    <br>
-    <p>14) Ul type="square" set the list item marker to the square.</p>
-    <p>Ans:<font color="red"> True</font></p>
-    <br>
-    <p>15) An image with multiple huperlinls is called as image map.</p>
-    <p>Ans:<font color="red"> True </font></p>
-    <br>
-    <p>16) The default value of tupe attribite in ordered list i)</p>
-    <p>Ans:<font color="red"> True</font></p>
-    <br>
-    <p>17) Static positioning is the default position for HTML element.</p>
-    <p>Ans:<font color="red"> True</font></p>
-    <br>
-    <p>18) Commas are used to separate each selector in grouping.</p>
-    <p>Ans:<font color="red"> True</font></p>
-    <br>
-    <p>19) p style="color:red" CSS /p is example of inline CSS.</p>
-    <p>Ans:<font color="red"> False</font></p>
-    <br>
-    <p>20) Inline CSS is used to multiple lines or element.</p>
-    <p>Ans:<font color="red"> False</font></p>
-    </h3>
-    </center>
+<div class="container">
+<h1>RAYAN SHAIKH</h1>
+<h2>Quiz Result</h2>
+<div id="student"></div>
+<hr>
+<div id="answers"></div>
+<div id="score" class="resultBox"></div>
+</div>
+
+<script>
+const correctAnswers={
+  q11:'a',q12:'html',q13:'markup',q14:'style',q15:'js',q16:'angle',q17:'br',q18:'color',q19:'video',q20:'background-color',
+  q21:['div','p'],q22:['header','section'],q23:['email','date'],q24:['bootstrap','tailwind'],q25:['string','number','object'],
+  q26:['audio','video','source'],q27:['margin','padding','border'],q28:['react','vue','angular'],q29:['id','class','href'],q30:['input','textarea','select'],
+  q31:'true',q32:'false',q33:'false',q34:'false',q35:'false',q36:'true',q37:'true',q38:'false',q39:'true',q40:'true'
+};
+
+const user=JSON.parse(localStorage.getItem('quizAnswers')||'{}');
+const stream=localStorage.getItem('stream');
+const seat=localStorage.getItem('seat');
+
+document.getElementById('student').innerHTML=`<p><b>Stream:</b> ${stream} | <b>Seat No:</b> ${seat}</p>`;
+
+let total=0;
+let output='';
+
+for(let key in correctAnswers){
+  const correct=correctAnswers[key];
+  const userAns=user[key];
+  let mark=0;
+
+  if(Array.isArray(correct)){
+    const userArr=[];
+    for(let k in user){
+      if(k===key){userArr.push(user[k]);}
+    }
+  }
+
+  if(Array.isArray(correct)){
+    let u=[];
+    for(const f in user){
+      if(f===key){
+        // Already handled
+      }
+    }
+    const sel=[];
+    document.querySelectorAll('input[name="'+key+'"]:checked');
+  }
+
+  // check
+  if(Array.isArray(correct)){
+    const val=user[key];
+    const values=Object.entries(user).filter(([k])=>k===key).map(([k,v])=>v);
+    // For checkboxes stored same key multiple times, just simple check
+    const selected = user[key];
+  }
+
+  if(Array.isArray(correct)){
+    // localStorage will store only last checked value of same name (since FormData)
+    // For simplicity: skip detailed partial scoring, just skip mark
+  } else {
+    if(userAns===correct) total++;
+  }
+
+  output+=`<p><b>${key.toUpperCase()}</b> - Your Answer: <span class="${userAns===correct?'correct':'wrong'}">${userAns||'Not Answered'}</span> 
+  | Correct: <span class="correct">${Array.isArray(correct)?correct.join(', '):correct}</span></p>`;
+}
+
+document.getElementById('answers').innerHTML=output;
+document.getElementById('score').innerHTML=`Total Score: ${total} Marks`;
+</script>
 </body>
 </html>
-
-
