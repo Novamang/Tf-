@@ -1,90 +1,335 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz Results - RAYAN SHAIKH</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<style>
-body{font-family:'Poppins',sans-serif;background-color:aqua;margin:0;padding:0;}
-.container{width:85%;margin:40px auto;background:#fff;padding:25px;border-radius:12px;box-shadow:0 0 10px rgba(0,0,0,0.3);}
-h1{text-align:center;color:#003366;}
-.correct{color:green;}
-.wrong{color:red;}
-.resultBox{font-size:20px;font-weight:bold;color:#004080;text-align:center;}
-</style>
-</head>
-<body>
-<div class="container">
-<h1>RAYAN SHAIKH</h1>
-<h2>Quiz Result</h2>
-<div id="student"></div>
-<hr>
-<div id="answers"></div>
-<div id="score" class="resultBox"></div>
-</div>
-
-<script>
-const correctAnswers={
-  q11:'a',q12:'html',q13:'markup',q14:'style',q15:'js',q16:'angle',q17:'br',q18:'color',q19:'video',q20:'background-color',
-  q21:['div','p'],q22:['header','section'],q23:['email','date'],q24:['bootstrap','tailwind'],q25:['string','number','object'],
-  q26:['audio','video','source'],q27:['margin','padding','border'],q28:['react','vue','angular'],q29:['id','class','href'],q30:['input','textarea','select'],
-  q31:'true',q32:'false',q33:'false',q34:'false',q35:'false',q36:'true',q37:'true',q38:'false',q39:'true',q40:'true'
-};
-
-const user=JSON.parse(localStorage.getItem('quizAnswers')||'{}');
-const stream=localStorage.getItem('stream');
-const seat=localStorage.getItem('seat');
-
-document.getElementById('student').innerHTML=`<p><b>Stream:</b> ${stream} | <b>Seat No:</b> ${seat}</p>`;
-
-let total=0;
-let output='';
-
-for(let key in correctAnswers){
-  const correct=correctAnswers[key];
-  const userAns=user[key];
-  let mark=0;
-
-  if(Array.isArray(correct)){
-    const userArr=[];
-    for(let k in user){
-      if(k===key){userArr.push(user[k]);}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rayan Shaikh - Passionate Science Student and Tech Enthusiast">
+  <meta property="og:title" content="Rayan Shaikh | Instagram Profile">
+  <meta property="og:image" content="https://i.ibb.co/Y7ZpQR1K/470901003-937947358301080-7117831969423789260-n.jpg">
+  <meta property="og:description" content="College Student passionate about scientific exploration and technology">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Rayan Shaikh | Science Student</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #000000;
+      --secondary: #e1306c;
+      --text: #f0f0f0;
+      --bg: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+      --card-bg: rgba(30,30,30,0.95);
     }
-  }
 
-  if(Array.isArray(correct)){
-    let u=[];
-    for(const f in user){
-      if(f===key){
-        // Already handled
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--primary);
+      box-shadow: 0 0 35px #8a42f5;
+      border-radius: 30px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      width: min(90vw, 420px);
+      backdrop-filter: blur(15px);
+      transform-origin: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .card {
+        animation: cardEntrance 1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
       }
     }
-    const sel=[];
-    document.querySelectorAll('input[name="'+key+'"]:checked');
-  }
 
-  // check
-  if(Array.isArray(correct)){
-    const val=user[key];
-    const values=Object.entries(user).filter(([k])=>k===key).map(([k,v])=>v);
-    // For checkboxes stored same key multiple times, just simple check
-    const selected = user[key];
-  }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(255,20,147,0.4);
+    }
 
-  if(Array.isArray(correct)){
-    // localStorage will store only last checked value of same name (since FormData)
-    // For simplicity: skip detailed partial scoring, just skip mark
-  } else {
-    if(userAns===correct) total++;
-  }
+    @keyframes cardEntrance {
+      0% { 
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      100% { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
-  output+=`<p><b>${key.toUpperCase()}</b> - Your Answer: <span class="${userAns===correct?'correct':'wrong'}">${userAns||'Not Answered'}</span> 
-  | Correct: <span class="correct">${Array.isArray(correct)?correct.join(', '):correct}</span></p>`;
-}
+    .avatar-container {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 1.5rem;
+      perspective: 1000px;
+    }
 
-document.getElementById('answers').innerHTML=output;
-document.getElementById('score').innerHTML=`Total Score: ${total} Marks`;
-</script>
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 4px solid var(--primary);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+      box-shadow: 0 0 30px var(--primary);
+      animation: avatarGlow 3s ease-in-out infinite;
+    }
+
+    .avatar:hover {
+      transform: rotateY(20deg) scale(1.05);
+    }
+
+    @keyframes avatarGlow {
+      0%, 100% { box-shadow: 0 0 30px var(--primary); }
+      50% { box-shadow: 0 0 45px var(--secondary); }
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      opacity: 0;
+      animation: textFadeIn 0.8s 0.3s forwards;
+    }
+
+    h4 {
+      font-weight: 400;
+      color: #ffa7c4;
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: textFadeIn 0.8s 0.5s forwards;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: #e0e0e0;
+      opacity: 0;
+      animation: textFadeIn 0.8s 0.7s forwards;
+    }
+  @keyframes textFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(45deg, var(--secondary), var(--primary));
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      animation: textFadeIn 0.8s 0.9s forwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+      );
+      transition: 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 8px 25px rgba(225, 48, 108, 0.4);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--primary), var(--secondary));
+      border-radius: 4px;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 2rem 1.5rem; }
+      .avatar-container { width: 140px; height: 140px; }
+      h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="main" aria-label="Profile Card">
+    <div class="avatar-container">
+      <div class="avatar" aria-label="Profile Picture">
+        <img src="https://i.ibb.co/S4tWC3w4/IMG-20251025-165621.jpg" alt="IMG-20251025-165621" border="0">         alt="Rayan Shaikh" 
+             loading="lazy" 
+             decoding="async">
+      </div>
+    </div>
+    <h1>Anonymous</h1>
+    <h4>College Student • <span id="age">17</span></h4>
+    <p>A creative heart exploring words, art, and dance. Still learning, still growing, and sharing all the chapters — the highs, the lows, and everything between.<br>
+      <strong>🔬 Science Enthusiast | 💻 Tech Explorer</strong></p>
+    <a href="https://www.instagram.com/life_unedited_13?igsh=MWx4N2NxazZwc3E5ZQ==" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="btn"
+       aria-label="Follow on Instagram">
+      <i class="fab fa-instagram"></i> 
+      <span>Follow Me</span>
+      <span class="sr-only">Instagram profile link</span>
+    </a>
+  </div>
+
+  <script>
+    // Dynamic Age Calculation
+    const birthYear = 2002; // Update with your birth year
+    document.getElementById('age').textContent = ${new Date().getFullYear() - birthYear} years;
+
+    // Card Click Animation
+    document.querySelector('.card').addEventListener('click', (e) => {
+      if (!e.target.closest('a')) {
+        e.currentTarget.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          e.currentTarget.style.transform = '';
+        }, 100);
+      }
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        document.querySelector('.btn').click();
+      }
+    });
+
+    // Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => console.log('SW registered'))
+          .catch(err => console.log('SW registration failed'));
+      });
+    }
+
+    // Snowflake Animation
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.querySelector('.avatar-container');
+    canvas.className = 'snowfall';
+    container.appendChild(canvas);
+
+    function resizeCanvas() {
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
+    }
+  const flakes = Array.from({ length: 25 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 3 + 1,
+      s: Math.random() * 0.3 + 0.2,
+      o: Math.random() * 0.5 + 0.3,
+      rot: Math.random() * Math.PI * 2
+    }));
+
+    function drawSnow() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.lineCap = 'round';
+      
+      flakes.forEach(flake => {
+        ctx.save();
+        ctx.translate(flake.x, flake.y);
+        ctx.rotate(flake.rot);
+        ctx.strokeStyle = rgba(255,255,255,${flake.o});
+        ctx.lineWidth = 1.2;
+        
+        for(let i = 0; i < 6; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, flake.r);
+          ctx.stroke();
+          ctx.rotate(Math.PI / 3);
+        }
+        
+        ctx.restore();
+        
+        flake.y += flake.s;
+        flake.rot += 0.01;
+        
+        if(flake.y > canvas.height) {
+          flake.y = -10;
+          flake.x = Math.random() * canvas.width;
+        }
+      });
+      
+      requestAnimationFrame(drawSnow);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    drawSnow();
+  </script>
 </body>
 </html>
